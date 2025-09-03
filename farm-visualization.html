@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>കർഷക സഹായി - 3D Farm Visualization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="farm-visualization.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="assets/logo.svg" alt="Farmer Support System Logo" class="logo">
+            <h1>കർഷക സഹായി - 3D Farm Visualization</h1>
+        </div>
+        <div class="header-controls">
+            <div class="language-toggle">
+                <button id="malayalam-btn" class="language-btn active">മലയാളം</button>
+                <button id="english-btn" class="language-btn">English</button>
+            </div>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span id="back-text"><span class="malayalam-text">തിരികെ പോകുക</span><span class="english-text">Back</span></span>
+            </a>
+            <button id="logout-btn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span id="logout-text"><span class="malayalam-text">ലോഗൗട്ട്</span><span class="english-text">Logout</span></span>
+            </button>
+        </div>
+    </header>
+    
+    <div class="visualization-container">
+        <div class="canvas-wrapper">
+            <canvas id="visualization-canvas"></canvas>
+            <div id="loading-overlay">
+                <div class="loader"></div>
+            </div>
+        </div>
+        
+        <div class="panels-container">
+            <div class="controls-panel">
+                <h2 id="controls-title"><span class="malayalam-text">നിയന്ത്രണങ്ങൾ</span><span class="english-text">Controls</span></h2>
+                
+                <div class="control-group">
+                    <label id="visualization-type-label" for="visualization-type"><span class="malayalam-text">വിഷ്വലൈസേഷൻ തരം</span><span class="english-text">Visualization Type</span></label>
+                    <select id="visualization-type">
+                        <option value="terrain"><span class="malayalam-text">കൃഷിഭൂമി</span><span class="english-text">Farm Terrain</span></option>
+                        <option value="crops"><span class="malayalam-text">വിളകൾ</span><span class="english-text">Crops</span></option>
+                        <option value="irrigation"><span class="malayalam-text">ജലസേചനം</span><span class="english-text">Irrigation</span></option>
+                        <option value="soil"><span class="malayalam-text">മണ്ണ് ആരോഗ്യം</span><span class="english-text">Soil Health</span></option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label id="time-period-label" for="time-period"><span class="malayalam-text">സമയ കാലയളവ്</span><span class="english-text">Time Period</span></label>
+                    <select id="time-period">
+                        <option value="current"><span class="malayalam-text">നിലവിലെ</span><span class="english-text">Current</span></option>
+                        <option value="week"><span class="malayalam-text">കഴിഞ്ഞ ആഴ്ച</span><span class="english-text">Last Week</span></option>
+                        <option value="month"><span class="malayalam-text">കഴിഞ്ഞ മാസം</span><span class="english-text">Last Month</span></option>
+                        <option value="season"><span class="malayalam-text">കഴിഞ്ഞ സീസൺ</span><span class="english-text">Last Season</span></option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label id="detail-level-label" for="detail-level"><span class="malayalam-text">വിശദാംശ നില</span><span class="english-text">Detail Level</span></label>
+                    <input type="range" id="detail-level" min="1" max="10" value="5">
+                </div>
+            </div>
+            
+            <div class="data-panel">
+                <h2 id="data-title"><span class="malayalam-text">ഫാം ഡാറ്റ</span><span class="english-text">Farm Data</span></h2>
+                
+                <div class="data-item">
+                    <span id="area-label"><span class="malayalam-text">മൊത്തം വിസ്തീർണ്ണം:</span><span class="english-text">Total Area:</span></span>
+                    <span><span class="malayalam-text">5.2 ഹെക്ടർ</span><span class="english-text">5.2 Hectares</span></span>
+                </div>
+                
+                <div class="data-item">
+                    <span id="soil-type-label"><span class="malayalam-text">മണ്ണിന്റെ തരം:</span><span class="english-text">Soil Type:</span></span>
+                    <span><span class="malayalam-text">ചെമ്മണ്ണ്</span><span class="english-text">Red Loam</span></span>
+                </div>
+                
+                <div class="data-item">
+                    <span id="crop-types-label"><span class="malayalam-text">വിള തരങ്ങൾ:</span><span class="english-text">Crop Types:</span></span>
+                    <span><span class="malayalam-text">നെല്ല്, തെങ്ങ്, വാഴ</span><span class="english-text">Rice, Coconut, Banana</span></span>
+                </div>
+                
+                <div class="data-item">
+                    <span id="irrigation-label"><span class="malayalam-text">ജലസേചന സംവിധാനം:</span><span class="english-text">Irrigation System:</span></span>
+                    <span><span class="malayalam-text">തുള്ളി നന, സ്പ്രിംക്ലർ</span><span class="english-text">Drip, Sprinkler</span></span>
+                </div>
+                
+                <div class="data-item">
+                    <span id="health-index-label"><span class="malayalam-text">ആരോഗ്യ സൂചിക:</span><span class="english-text">Health Index:</span></span>
+                    <span>85% <span class="malayalam-text">(നല്ലത്)</span><span class="english-text">(Good)</span></span>
+                </div>
+                
+                <div class="health-legend">
+                    <span>0</span>
+                    <div class="health-gradient"></div>
+                    <span>100</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="farm-visualization.js"></script>
+</body>
+</html>

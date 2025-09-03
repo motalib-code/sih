@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="45" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  
+  <!-- Plant/Leaf Symbol -->
+  <path d="M50 20 C60 30, 70 40, 50 60 C30 40, 40 30, 50 20" fill="#2e7d32" />
+  <path d="M50 20 C40 30, 30 40, 50 60 C70 40, 60 30, 50 20" fill="#2e7d32" />
+  
+  <!-- Stem -->
+  <line x1="50" y1="60" x2="50" y2="75" stroke="#2e7d32" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Roots -->
+  <path d="M50 75 C45 80, 40 82, 35 80" stroke="#2e7d32" stroke-width="2" fill="none" />
+  <path d="M50 75 C55 80, 60 82, 65 80" stroke="#2e7d32" stroke-width="2" fill="none" />
+  <path d="M50 75 C48 80, 46 85, 45 90" stroke="#2e7d32" stroke-width="2" fill="none" />
+  <path d="M50 75 C52 80, 54 85, 55 90" stroke="#2e7d32" stroke-width="2" fill="none" />
+  
+  <!-- Water Droplet -->
+  <path d="M30 40 C30 35, 25 30, 20 35 C15 40, 20 50, 30 40" fill="#81c784" />
+  
+  <!-- Sun Ray -->
+  <circle cx="70" cy="30" r="5" fill="#ffb74d" />
+  <line x1="70" y1="22" x2="70" y2="18" stroke="#ffb74d" stroke-width="2" />
+  <line x1="70" y1="42" x2="70" y2="38" stroke="#ffb74d" stroke-width="2" />
+  <line x1="62" y1="30" x2="58" y2="30" stroke="#ffb74d" stroke-width="2" />
+  <line x1="82" y1="30" x2="78" y2="30" stroke="#ffb74d" stroke-width="2" />
+  <line x1="64" y1="24" x2="61" y2="21" stroke="#ffb74d" stroke-width="2" />
+  <line x1="79" y1="39" x2="76" y2="36" stroke="#ffb74d" stroke-width="2" />
+  <line x1="64" y1="36" x2="61" y2="39" stroke="#ffb74d" stroke-width="2" />
+  <line x1="79" y1="21" x2="76" y2="24" stroke="#ffb74d" stroke-width="2" />
+</svg>

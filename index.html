@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>കർഷക സഹായി - Farmer Support System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="assets/logo.svg" alt="കർഷക സഹായി Logo">
+                <h1>കർഷക സഹായി</h1>
+            </div>
+            <div class="header-controls">
+                <div class="language-toggle">
+                    <button id="malayalam-btn" class="active">മലയാളം</button>
+                    <button id="english-btn">English</button>
+                </div>
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> <span id="logout-text">ലോഗൗട്ട്</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message system">
+                        <div class="message-content">
+                            <p>നമസ്കാരം! ഞാൻ കർഷക സഹായി, നിങ്ങളുടെ കൃഷി സഹായി AI. കൃഷി, കീടങ്ങൾ, രോഗങ്ങൾ, കാലാവസ്ഥ, സബ്സിഡികൾ എന്നിവയെക്കുറിച്ചുള്ള ചോദ്യങ്ങൾക്ക് എന്നോട് ചോദിക്കാം.</p>
+                            <p>Hello! I am Farmer Assistant, your agricultural AI helper. You can ask me questions about farming, pests, diseases, weather, subsidies, and more.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-options">
+                        <button id="voice-input-btn" title="Voice Input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="image-upload-btn" title="Upload Image">
+                            <i class="fas fa-image"></i>
+                        </button>
+                        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                    </div>
+                    <textarea id="user-input" placeholder="നിങ്ങളുടെ ചോദ്യം ഇവിടെ ടൈപ്പ് ചെയ്യുക... / Type your question here..."></textarea>
+                    <button id="send-btn" title="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="features-panel">
+                <div class="weather-widget">
+                    <h3>കാലാവസ്ഥ / Weather</h3>
+                    <div id="weather-data">
+                        <p>Loading weather data...</p>
+                    </div>
+                </div>
+                
+                <div class="working-conditions">
+                    <h3>ജോലി സാഹചര്യങ്ങൾ / Working Conditions</h3>
+                    <div class="work-recommendation" id="work-recommendation">
+                        <p><i class="fas fa-sun"></i> <strong>ഇന്നത്തെ ജോലി നിർദ്ദേശം / Today's Work Recommendation:</strong></p>
+                        <p>കാലാവസ്ഥ അനുയോജ്യമാണ്. വിളവെടുപ്പ് നടത്താൻ ശുപാർശ ചെയ്യുന്നു. / Weather is favorable. Harvesting is recommended.</p>
+                    </div>
+                    <div class="safety-alert" id="safety-alert">
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>സുരക്ഷാ മുന്നറിയിപ്പ് / Safety Alert:</strong></p>
+                        <p>ഉയർന്ന താപനില. ധാരാളം വെള്ളം കുടിക്കുക, മതിയായ വിശ്രമം എടുക്കുക. / High temperature. Drink plenty of water, take adequate rest.</p>
+                    </div>
+                    <button id="soil-monitor-btn" class="feature-btn">
+                        <i class="fas fa-seedling"></i> മണ്ണ് നിരീക്ഷണം / Soil Monitoring
+                    </button>
+                    <button id="crop-calendar-btn" class="feature-btn">
+                        <i class="fas fa-calendar-alt"></i> വിള കലണ്ടർ / Crop Calendar
+                    </button>
+                    <button id="equipment-btn" class="feature-btn">
+                        <i class="fas fa-tools"></i> ഉപകരണ പരിപാലനം / Equipment Maintenance
+                    </button>
+                </div>
+                
+                <div class="quick-links">
+                    <h3>പ്രധാന ലിങ്കുകൾ / Quick Links</h3>
+                    <ul>
+                        <li><a href="#">കൃഷി വകുപ്പ് / Agriculture Department</a></li>
+                        <li><a href="#">സബ്സിഡി വിവരങ്ങൾ / Subsidy Information</a></li>
+                        <li><a href="#">വിള സംരക്ഷണം / Crop Protection</a></li>
+                        <li><a href="#">വിപണി വിലകൾ / Market Prices</a></li>
+                        <li><a href="#" id="ergonomics-link">എർഗണോമിക് കൃഷി / Ergonomic Farming</a></li>
+                        <li><a href="#" id="health-link">തൊഴിലാളി ആരോഗ്യം / Worker Health</a></li>
+                        <li><a href="farm-visualization.html" id="farm-visualization-link"><i class="fas fa-cube"></i> 3D കൃഷിയിടം കാഴ്ച / 3D Farm Visualization</a></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <div id="image-preview-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>ചിത്രം സ്ഥിരീകരിക്കുക / Confirm Image</h3>
+                <img id="image-preview" src="" alt="Preview">
+                <p>ഈ ചിത്രം AI വിശകലനം ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ? / Do you want the AI to analyze this image?</p>
+                <div class="modal-buttons">
+                    <button id="confirm-image">സ്ഥിരീകരിക്കുക / Confirm</button>
+                    <button id="cancel-image">റദ്ദാക്കുക / Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="expert-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>വിദഗ്ധനുമായി ബന്ധപ്പെടുക / Connect with Expert</h3>
+                <p>നിങ്ങളുടെ ചോദ്യം സങ്കീർണ്ണമാണ്. ഒരു കൃഷി ഓഫീസറുമായി ബന്ധപ്പെടാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?</p>
+                <p>Your question is complex. Would you like to connect with an agricultural officer?</p>
+                <div class="modal-buttons">
+                    <button id="confirm-expert">അതെ / Yes</button>
+                    <button id="cancel-expert">ഇല്ല / No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="key-features-container">
+        <h2>🌱 പ്രധാന സവിശേഷതകൾ / Key Features</h2>
+        <div class="key-features">
+            <div class="feature-card">
+                <i class="fas fa-tractor"></i>
+                <h3>എല്ലാം-ഒരു കൃഷി സഹായി / All-in-One Farming Assistant</h3>
+                <p class="malayalam-text">വിള തിരഞ്ഞെടുക്കൽ, ജലസേചനം, കീടനിയന്ത്രണം, വിപണി വിലകൾ എന്നിവയിൽ വ്യക്തിഗത ശുപാർശകൾ നൽകുന്നു.</p>
+                <p class="english-text">Offers personalized recommendations on crop selection, irrigation, pest control, and market prices.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI സംയോജനം / AI Integration</h3>
+                <p class="malayalam-text">വ്യക്തിഗതമായ ഉപദേശത്തിനായി പരിസ്ഥിതി ഡാറ്റയും കൃഷി സാഹചര്യങ്ങളും വിശകലനം ചെയ്യാൻ കൃത്രിമ ബുദ്ധി ഉപയോഗിക്കുന്നു.</p>
+                <p class="english-text">Uses artificial intelligence to analyze environmental data and farming conditions for tailored advice.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-user-friends"></i>
+                <h3>ഉപയോക്തൃ സൗഹൃദ ഇന്റർഫേസ് / User-Friendly Interface</h3>
+                <p class="malayalam-text">പരിമിതമായ സാങ്കേതിക അനുഭവമുള്ള കർഷകർക്ക് പോലും ആക്സസ് ചെയ്യാൻ കഴിയുന്ന വിധം രൂപകൽപ്പന ചെയ്തിരിക്കുന്നു.</p>
+                <p class="english-text">Designed for accessibility, even for farmers with limited tech experience.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>സ്കേലബിൾ ഇമ്പാക്ട് / Scalable Impact</h3>
+                <p class="malayalam-text">ഗ്രാമീണ കർഷക സമൂഹങ്ങളിലുടനീളം ഉൽപാദനക്ഷമതയും തീരുമാനമെടുക്കലും മെച്ചപ്പെടുത്താൻ ലക്ഷ്യമിടുന്നു.</p>
+                <p class="english-text">Aims to improve productivity and decision-making across rural farming communities.</p>
+            </div>
+        </div>
+        <div class="why-it-matters">
+            <h2>🚜 ഇത് പ്രധാനമായിരിക്കുന്നത് എന്തുകൊണ്ട് / Why It Matters</h2>
+            <p class="malayalam-text">ഈ ഉപകരണം കർഷകരെ യഥാർത്ഥ സമയ ഉൾക്കാഴ്ചകളും ഡാറ്റ അടിസ്ഥാനമാക്കിയുള്ള തീരുമാനങ്ങളും നൽകി ശാക്തീകരിക്കുന്നു, അവരെ വിളവ് ഒപ്റ്റിമൈസ് ചെയ്യാനും റിസ്ക് കുറയ്ക്കാനും സഹായിക്കുന്നു—പ്രത്യേകിച്ചും പരമ്പരാഗത ഉപദേശക സേവനങ്ങൾ പരിമിതമായ പ്രദേശങ്ങളിൽ.</p>
+            <p class="english-text">This tool empowers farmers with real-time insights and data-backed decisions, helping them optimize yields and reduce risks—especially in regions where traditional advisory services are limited.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 കർഷക സഹായി - AI-Based Farmer Query Support and Advisory System</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

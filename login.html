@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>കർഷക സഹായി - Login</title>
+    <link rel="stylesheet" href="login-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="കർഷക സഹായി Logo">
+                <h1>കർഷക സഹായി</h1>
+            </div>
+            
+            <div class="login-form">
+                <h2>ലോഗിൻ / Login</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="ഉപയോക്തൃനാമം / Username" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="പാസ്‌വേഡ് / Password" required>
+                    </div>
+                    <div class="language-toggle">
+                        <button type="button" id="malayalam-btn" class="active">മലയാളം</button>
+                        <button type="button" id="english-btn">English</button>
+                    </div>
+                    <button type="submit" class="login-btn">പ്രവേശിക്കുക / Login</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 3D Loading Animation Container -->
+        <div class="loading-container" id="loading-container">
+            <div class="spinner-box">
+                <div class="solar-system">
+                    <div class="earth-orbit orbit">
+                        <div class="planet earth"></div>
+                        <div class="venus-orbit orbit">
+                            <div class="planet venus"></div>
+                            <div class="mercury-orbit orbit">
+                                <div class="planet mercury"></div>
+                                <div class="sun"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="loading-text">ലോഡിംഗ് / Loading...</p>
+            </div>
+        </div>
+        
+        <!-- Welcome Message Container -->
+        <div class="welcome-container" id="welcome-container">
+            <div class="welcome-message">
+                <i class="fas fa-check-circle"></i>
+                <h2 id="welcome-text">സ്വാഗതം! / Welcome!</h2>
+                <p id="user-greeting">കർഷക സഹായിയിലേക്ക് സ്വാഗതം / Welcome to Farmer Assistant</p>
+                <div class="redirect-message">
+                    <p id="redirect-text">നിങ്ങളെ ഉടൻ തന്നെ പ്രധാന പേജിലേക്ക് റീഡയറക്ട് ചെയ്യുന്നതാണ് / You will be redirected to the main page shortly</p>
+                    <div class="redirect-dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
